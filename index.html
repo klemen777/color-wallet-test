@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050607">
+  <title>Color Wallet</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="title">HLADNA ZIMA</h1>
+<p class="subtitle">Tvoj osebni digitalni barvni vodič.</p>
+<p class="client-name">Linda Angela</p>
+
+<div class="grid" id="grid"></div>
+
+<div class="fullscreen" id="fullscreen">
+  <div class="close" id="close">✕</div>
+</div>
+
+<script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+</body>
+</html>

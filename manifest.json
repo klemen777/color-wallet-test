@@ -1,9 +1,0 @@
-{
-  "name": "Cool Winter Wallet",
-  "short_name": "Cool Winter",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#050607",
-  "theme_color": "#050607",
-  "icons": []
-}

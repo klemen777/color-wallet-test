@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cool Winter</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="Images/AppIcon_TintLogo_V1.png">
+</head>
+<body>
+
+<div class="login" id="loginScreen">
+  <h2>Vnesite geslo</h2>
+  <input id="passwordInput" type="password" placeholder="Geslo">
+  <button type="button" onclick="checkPassword()">Odkleni</button>
+</div>
+
+<div id="appContent" style="display: none;">
+  <img class="title-logo" src="Images/ZimaHladna_Logo_V1.svg" alt="Hladna Zima logo">
+  <p class="subtitle">Vaš osebni barvni vodič.</p>
+  <p class="subtitle subtitle-note">Najlepše zažarite v hladnih tonih.</p>
+  <img class="client-logo" src="Images/TintLogoSmall_V1.svg" alt="Tint small logo">
+
+  <div class="grid" id="grid"></div>
+
+  <div class="fullscreen" id="fullscreen">
+    <div class="close" id="close">✕</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js", { updateViaCache: "none" });
+}
+</script>
+</body>
+</html>

@@ -1,3 +1,30 @@
+// PASSWORD (CHANGE THIS)
+const PASSWORD = "cw-8392";
+
+// elements
+const loginScreen = document.getElementById("loginScreen");
+const appContent = document.getElementById("appContent");
+
+// check if already unlocked
+if (localStorage.getItem("unlocked") === "true") {
+  loginScreen.style.display = "none";
+  appContent.style.display = "block";
+}
+
+// password function
+function checkPassword() {
+  const input = document.getElementById("passwordInput").value;
+
+  if (input === PASSWORD) {
+    localStorage.setItem("unlocked", "true");
+
+    loginScreen.style.display = "none";
+    appContent.style.display = "block";
+  } else {
+    alert("Wrong password");
+  }
+}
+
 const colors = [
   "#050607", "#313A40", "#55555A", "#808088", "#B0ACBA", "#5A494A",
   "#F6F177", "#D6D4E3", "#F9CEE1", "#CF2041", "#76113F", "#841643",

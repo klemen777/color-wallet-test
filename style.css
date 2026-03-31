@@ -8,9 +8,9 @@ body {
 
 .title-logo {
   display: block;
-  height: 119px;
+  height: 101px;
   width: auto;
-  margin: 10px auto 14px;
+  margin: 8px auto 12px;
 }
 
 .subtitle {
@@ -22,7 +22,7 @@ body {
 }
 
 .subtitle-note {
-  margin: 0 auto 20px;
+  margin: 0 auto 14px;
   line-height: 1.4;
   white-space: nowrap;
 }
@@ -38,14 +38,14 @@ body {
   display: block;
   height: 18px;
   width: auto;
-  margin: 6px auto 16px;
+  margin: 2px auto 10px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  padding: 8px 10px 10px;
+  padding: 4px 10px 10px;
 }
 
 .swatch {

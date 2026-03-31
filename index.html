@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050607">
-  <title>Color Wallet</title>
-  <link rel="manifest" href="manifest.json">
+  <title>Cool Winter</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="Images/AppIcon_TintLogo_V1.png">
 </head>
 <body>
 
-<h1 class="title">HLADNA ZIMA</h1>
+<img class="title-logo" src="Images/ZimaHladna_Logo_V1.svg" alt="Hladna Zima logo">
 <p class="subtitle">Tvoj osebni digitalni barvni vodič.</p>
-<p class="client-name">Linda Angela</p>
+<p class="subtitle subtitle-note">Najlepše zažarite v hladnih tonih, tople odtenke pa izbirajte čim bolj zadržano.</p>
+<img class="client-logo" src="Images/TintLogoSmall_V1.svg" alt="Tint small logo">
 
 <div class="grid" id="grid"></div>
 
@@ -23,7 +25,7 @@
 <script src="script.js"></script>
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
+  navigator.serviceWorker.register("service-worker.js", { updateViaCache: "none" });
 }
 </script>
 </body>

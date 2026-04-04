@@ -10,7 +10,7 @@
   --tint-logo-height: clamp(48px, 8.3dvh, 73px);
   --swatch-radius: clamp(12px, 2vw, 18px);
   --hero-logo-scale: 1.14;
-  --home-side-logo-inset: clamp(8px, 2vw, 14px);
+  --home-side-logo-inset: clamp(14px, 3vw, 22px);
   --close-button-size: clamp(46px, 6.4dvh, 58px);
   --close-button-icon-size: clamp(28px, 4.2dvh, 36px);
 }
@@ -85,7 +85,7 @@ body {
 
 .side-logo-right {
   justify-self: end;
-  transform: scale(0.9);
+  transform: scale(1.1);
   transform-origin: center;
   margin-top: 4px;
 }

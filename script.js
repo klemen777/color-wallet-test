@@ -96,7 +96,7 @@ function syncTintLogoPosition() {
   layoutToggle.style.transform = "none";
   const buttonRect = layoutToggle.getBoundingClientRect();
   const zimaRect = clientLogo.getBoundingClientRect();
-  const sideTop = zimaRect.top + (zimaRect.height / 2) - (buttonRect.height / 2) + 6;
+  const sideTop = zimaRect.top + (zimaRect.height / 2) - (buttonRect.height / 2);
 
   layoutToggle.style.transform = `translateY(${sideTop - buttonRect.top}px)`;
   applyTintLogoPosition(target);

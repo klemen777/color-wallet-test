@@ -8,7 +8,8 @@ const appContent = document.getElementById("appContent");
 // check if already unlocked
 if (localStorage.getItem("unlocked") === "true") {
   loginScreen.style.display = "none";
-  appContent.style.display = "block";
+  appContent.style.display = "flex";
+  requestAnimationFrame(syncTintLogoPosition);
 }
 
 // password function
@@ -19,7 +20,8 @@ function checkPassword() {
     localStorage.setItem("unlocked", "true");
 
     loginScreen.style.display = "none";
-    appContent.style.display = "block";
+    appContent.style.display = "flex";
+    requestAnimationFrame(syncTintLogoPosition);
   } else {
     alert("Wrong password");
   }
@@ -38,8 +40,19 @@ const colors = [
 const grid = document.getElementById("grid");
 const fullscreen = document.getElementById("fullscreen");
 const closeBtn = document.getElementById("close");
+const layoutToggle = document.getElementById("layoutToggle");
+const layoutScreen = document.getElementById("layoutScreen");
+const layoutStripes = document.getElementById("layoutStripes");
+const layoutClose = document.getElementById("layoutClose");
+const logoSpinButton = document.getElementById("logoSpinButton");
+const homeTintAnchor = document.getElementById("homeTintAnchor");
+const centerTintAnchor = document.getElementById("centerTintAnchor");
+const sharedTintLogo = document.getElementById("sharedTintLogo");
+const clientLogo = document.getElementById("clientLogo");
 
 let currentIndex = 0;
+let isLayoutOpen = false;
+let isFullscreenOpen = false;
 
 // create swatches
 colors.forEach((color, index) => {
@@ -52,23 +65,97 @@ colors.forEach((color, index) => {
   grid.appendChild(div);
 });
 
+colors.forEach((color) => {
+  const stripe = document.createElement("div");
+  stripe.className = "layout-stripe";
+  stripe.style.background = color;
+  layoutStripes.appendChild(stripe);
+});
+
+function applyTintLogoPosition(target) {
+  const homeRect = homeTintAnchor.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  const zimaRect = clientLogo.getBoundingClientRect();
+  const tintHeight = sharedTintLogo.getBoundingClientRect().height;
+  const x = target === centerTintAnchor
+    ? targetRect.left
+    : homeRect.left;
+  const y = (zimaRect.top + (zimaRect.height / 2)) - (tintHeight / 2);
+
+  sharedTintLogo.style.transform = `translate(${x}px, ${y}px)`;
+  sharedTintLogo.style.opacity = "1";
+}
+
+function syncTintLogoPosition() {
+  if (loginScreen.style.display !== "none") {
+    sharedTintLogo.style.opacity = "0";
+    return;
+  }
+
+  const target = (isLayoutOpen || isFullscreenOpen) ? centerTintAnchor : homeTintAnchor;
+  layoutToggle.style.transform = "none";
+  const buttonRect = layoutToggle.getBoundingClientRect();
+  const zimaRect = clientLogo.getBoundingClientRect();
+  const sideTop = zimaRect.top + (zimaRect.height / 2) - (buttonRect.height / 2) + 6;
+
+  layoutToggle.style.transform = `translateY(${sideTop - buttonRect.top}px)`;
+  applyTintLogoPosition(target);
+}
+
 function openFullscreen(index) {
   currentIndex = index;
+  isFullscreenOpen = true;
   fullscreen.style.display = "block";
   fullscreen.style.background = colors[index];
 
   requestAnimationFrame(() => {
     fullscreen.style.opacity = "1";
+    syncTintLogoPosition();
   });
 }
 
 closeBtn.onclick = () => {
+  isFullscreenOpen = false;
+  syncTintLogoPosition();
   fullscreen.style.opacity = "0";
 
   setTimeout(() => {
     fullscreen.style.display = "none";
+    syncTintLogoPosition();
   }, 250);
 };
+
+layoutToggle.onclick = () => {
+  applyTintLogoPosition(homeTintAnchor);
+  layoutScreen.classList.add("is-visible");
+  isLayoutOpen = true;
+
+  requestAnimationFrame(() => {
+    layoutScreen.style.opacity = "1";
+    syncTintLogoPosition();
+  });
+};
+
+layoutClose.onclick = () => {
+  isLayoutOpen = false;
+  syncTintLogoPosition();
+  layoutScreen.style.opacity = "0";
+
+  setTimeout(() => {
+    layoutScreen.classList.remove("is-visible");
+    syncTintLogoPosition();
+  }, 250);
+};
+
+logoSpinButton.onclick = () => {
+  clientLogo.classList.remove("is-spinning");
+  void clientLogo.offsetWidth;
+  clientLogo.classList.add("is-spinning");
+};
+
+clientLogo.addEventListener("animationend", () => {
+  clientLogo.classList.remove("is-spinning");
+});
 
 // swipe support
 let startX = 0;
@@ -92,4 +179,11 @@ function nextColor() {
 function prevColor() {
   currentIndex = (currentIndex - 1 + colors.length) % colors.length;
   fullscreen.style.background = colors[currentIndex];
+}
+
+window.addEventListener("resize", syncTintLogoPosition);
+window.addEventListener("load", syncTintLogoPosition);
+
+if (localStorage.getItem("unlocked") === "true") {
+  syncTintLogoPosition();
 }

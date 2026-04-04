@@ -49,10 +49,18 @@ const homeTintAnchor = document.getElementById("homeTintAnchor");
 const centerTintAnchor = document.getElementById("centerTintAnchor");
 const sharedTintLogo = document.getElementById("sharedTintLogo");
 const clientLogo = document.getElementById("clientLogo");
+const themeColorMeta = document.getElementById("themeColorMeta");
+const defaultThemeColor = "#000000";
 
 let currentIndex = 0;
 let isLayoutOpen = false;
 let isFullscreenOpen = false;
+
+function setThemeColor(color) {
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", color);
+  }
+}
 
 // create swatches
 colors.forEach((color, index) => {
@@ -107,6 +115,7 @@ function openFullscreen(index) {
   isFullscreenOpen = true;
   fullscreen.style.display = "block";
   fullscreen.style.background = colors[index];
+  setThemeColor(colors[index]);
 
   requestAnimationFrame(() => {
     fullscreen.style.opacity = "1";
@@ -116,6 +125,7 @@ function openFullscreen(index) {
 
 closeBtn.onclick = () => {
   isFullscreenOpen = false;
+  setThemeColor(defaultThemeColor);
   syncTintLogoPosition();
   fullscreen.style.opacity = "0";
 
@@ -174,11 +184,13 @@ fullscreen.addEventListener("touchend", (e) => {
 function nextColor() {
   currentIndex = (currentIndex + 1) % colors.length;
   fullscreen.style.background = colors[currentIndex];
+  setThemeColor(colors[currentIndex]);
 }
 
 function prevColor() {
   currentIndex = (currentIndex - 1 + colors.length) % colors.length;
   fullscreen.style.background = colors[currentIndex];
+  setThemeColor(colors[currentIndex]);
 }
 
 window.addEventListener("resize", syncTintLogoPosition);

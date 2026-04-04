@@ -10,6 +10,7 @@
   --tint-logo-height: clamp(48px, 8.3dvh, 73px);
   --swatch-radius: clamp(12px, 2vw, 18px);
   --hero-logo-scale: 1.14;
+  --home-side-logo-inset: clamp(8px, 2vw, 14px);
   --close-button-size: clamp(46px, 6.4dvh, 58px);
   --close-button-icon-size: clamp(28px, 4.2dvh, 36px);
 }
@@ -78,6 +79,7 @@ body {
 
 .side-logo-left {
   justify-self: start;
+  margin-left: var(--home-side-logo-inset);
   visibility: hidden;
 }
 
@@ -92,6 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: var(--home-side-logo-inset);
   padding: 0;
   border: 0;
   background: transparent;
